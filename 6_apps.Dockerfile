@@ -1,6 +1,7 @@
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
+# Install additional apt packages which have been previously identified as needed
 RUN apt-get update && apt-get install -y --no-install-recommends \
     vim \
     docker.io \
@@ -45,20 +46,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Build movia lidar sdk and install to /opt/mvis_sdk
+RUN --mount=type=bind,source=docker-aux/apps/movia_lidar,target=/tmp/movia \
+    /tmp/movia/install_movia_sdk.sh
+
+
 RUN pip install uv
 
-# Install additional pip packages
-RUN uv pip install --system py-cpuinfo \
-                # for casc2
-                skyfield \
-                scipy \
-                pandas \
-                matplotlib \
-                # for multi-modal project
-                mcp \
-                fastmcp \
-                uvicorn \
-                google-adk \
-                # for AFRL
-                onnx \
-                quadprog
+# # Install additional pip packages
+# RUN uv pip install --system py-cpuinfo \
+#                 # for multi-modal project
+#                 mcp \
+#                 fastmcp \
+#                 uvicorn \
+#                 google-adk \
+#                 # for AFRL
+#                 quadprog

@@ -30,3 +30,7 @@ pyceres==2.5
 nerfacc==0.5.3
 usd-core==25.11
 cmake==3.31.6
+matplotlib==3.10.6
+pandas==2.3.2
+scipy==1.15.3
+skyfield==1.53

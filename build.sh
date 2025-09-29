@@ -37,13 +37,13 @@ for stage in "${STAGES[@]}"; do
     fi
 
     echo "Building $TAG"
-
+    set -x
     if [ -n "$PREV_TAG" ]; then
         docker build --progress=plain -f "$dockerfile" --build-arg BASE_IMAGE="$PREV_TAG" -t "$TAG" .
     else
         docker build --progress=plain -f "$dockerfile" -t "$TAG" .
     fi
-
+    set +x
     PREV_TAG="$TAG"
     echo "Built $TAG"
     echo ""

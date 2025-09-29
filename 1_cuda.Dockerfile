@@ -1,11 +1,10 @@
-ARG BASE_IMAGE=ubuntu:22.04
+ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
 # CUDA Toolkit Version 12.6 Update 3
 # Installs cuda-toolkit, cuda-compat
 RUN --mount=type=bind,source=docker-aux/cuda/cuda,target=/tmp/docker-aux/cuda \
     /tmp/docker-aux/cuda/install_cuda.sh
-
 LABEL cuda.version="12.6.3"
 
 # CUDNN Version 9.3.0
@@ -53,7 +52,7 @@ RUN ln -sf /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/libcuda.
  && ln -sf /usr/local/cuda/lib64/stubs/libcuda.so.1 /usr/local/cuda/lib64/libcuda.so.1 || true
 
 
-# Install all additional cuda libraries compatible with CUDA 12.6 and tegra-aarch64
+# Install additional cuda libraries compatible with CUDA 12.6 and tegra-aarch64
 
 # NCCL Version 2.27.7
 # NCCL Allows for multi-gpu orchestration.  Potential to share GPU Bound workloads between both Orin Modules in the custom carrier over Ethernet
