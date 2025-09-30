@@ -26,3 +26,4 @@ update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-$LLVM_VE
 update-alternatives --install /usr/bin/opt opt /usr/bin/opt-$LLVM_VERSION 100
 update-alternatives --install /usr/bin/llc llc /usr/bin/llc-$LLVM_VERSION 100
 
+rm llvm.sh
